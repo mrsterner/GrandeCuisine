@@ -1,2 +1,2 @@
 # GrandeCuisine2
-I try to leand Fabric
+I try to learn Fabric
