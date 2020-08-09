@@ -1,0 +1,20 @@
+{
+  "variants": {
+    "facing=north,age=0": {"model": "grandecuisine:block/hibachi"},
+    "facing=east,age=0": {"model": "grandecuisine:block/hibachi", "y": 90},
+    "facing=south,age=0": {"model": "grandecuisine:block/hibachi", "y": 180},
+    "facing=west,age=0": {"model": "grandecuisine:block/hibachi", "y": 270},
+
+    "facing=north,age=1": {"model": "grandecuisine:block/hibachi_salmon"},
+    "facing=east,age=1": {"model": "grandecuisine:block/hibachi_salmon", "y": 90},
+    "facing=south,age=1": {"model": "grandecuisine:block/hibachi_salmon", "y": 180},
+    "facing=west,age=1": {"model": "grandecuisine:block/hibachi_salmon", "y": 270},
+
+    "facing=north,age=2": {"model": "grandecuisine:block/hibachi_cooked_salmon"},
+    "facing=east,age=2": {"model": "grandecuisine:block/hibachi_cooked_salmon", "y": 90},
+    "facing=south,age=2": {"model": "grandecuisine:block/hibachi_cooked_salmon", "y": 180},
+    "facing=west,age=2": {"model": "grandecuisine:block/hibachi_cooked_salmon", "y": 270}
+
+
+  }
+}
