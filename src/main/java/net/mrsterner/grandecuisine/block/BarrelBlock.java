@@ -1,18 +1,20 @@
 package net.mrsterner.grandecuisine.block;
 
 
+import io.netty.buffer.Unpooled;
+import net.fabricmc.fabric.api.network.ServerSidePacketRegistry;
+import net.fabricmc.fabric.api.server.PlayerStream;
 import net.minecraft.block.*;
-import net.minecraft.entity.ItemEntity;
+import net.minecraft.block.entity.BlockEntity;
 import net.minecraft.entity.player.PlayerEntity;
+import net.minecraft.inventory.Inventory;
+import net.minecraft.inventory.SidedInventory;
 import net.minecraft.item.ItemPlacementContext;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.Items;
-import net.minecraft.particle.ParticleTypes;
-import net.minecraft.server.world.ServerWorld;
+import net.minecraft.network.PacketByteBuf;
 import net.minecraft.state.StateManager;
 import net.minecraft.state.property.Properties;
 import net.minecraft.state.property.Property;
-import net.minecraft.util.ActionResult;
 import net.minecraft.util.Hand;
 import net.minecraft.util.hit.BlockHitResult;
 import net.minecraft.util.math.BlockPos;
@@ -21,25 +23,27 @@ import net.minecraft.util.shape.VoxelShape;
 import net.minecraft.util.shape.VoxelShapes;
 import net.minecraft.world.BlockView;
 import net.minecraft.world.World;
+import net.mrsterner.grandecuisine.GrandeCuisine;
+import net.mrsterner.grandecuisine.blockentity.BarrelBlockEntity;
+import org.jetbrains.annotations.Nullable;
 
-import java.util.Random;
+import java.util.stream.Stream;
 
 
-public class BarrelBlock extends HorizontalFacingBlock {
+public class BarrelBlock extends HorizontalFacingBlock  {
 
-    public static final Property<Integer> POWER = Properties.POWER;
     public static final Property<Integer> AGE;
     private static final VoxelShape EAST_SHAPE;
     private static final VoxelShape WEST_SHAPE;
     private static final VoxelShape SOUTH_SHAPE;
     private static final VoxelShape NORTH_SHAPE;
 
-    //private static final IntProperty AGE;
 
     public BarrelBlock(Settings settings) {
         super(settings);
         this.setDefaultState(this.stateManager.getDefaultState().with(FACING, Direction.NORTH));
     }
+
 
     @Override
     public BlockState getPlacementState(ItemPlacementContext ctx) {
@@ -50,8 +54,6 @@ public class BarrelBlock extends HorizontalFacingBlock {
     protected void appendProperties(StateManager.Builder<Block, BlockState> builder) {
         builder.add(FACING);
     }
-
-
 
 
 
@@ -94,7 +96,6 @@ public class BarrelBlock extends HorizontalFacingBlock {
 
         return buffer[0];
     }
-
 
 
 }
