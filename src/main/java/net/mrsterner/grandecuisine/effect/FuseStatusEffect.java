@@ -47,12 +47,11 @@ public class FuseStatusEffect extends ModStatusEffect {
         System.out.println("Hejon");
         if (livingEntity instanceof PlayerEntity) {
             PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
-            int shaderI = 1;
-            boolean shaderOn2 = true;
-
-            //passedData.writeBoolean(shaderOn2);
-            passedData.writeInt(shaderI);
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer((PlayerEntity) livingEntity, GrandeCuisine.PLAY_PARTICLE_PACKET_ID,passedData);
+            //int shaderI = 1;
+            boolean shaderState = true;
+            passedData.writeBoolean(shaderState);
+            //passedData.writeInt(shaderI);
+            ServerSidePacketRegistry.INSTANCE.sendToPlayer((PlayerEntity) livingEntity, GrandeCuisine.SHADER_PACKET_ID,passedData);
             System.out.println("Hejon_end");
         }
 
@@ -62,11 +61,11 @@ public class FuseStatusEffect extends ModStatusEffect {
         System.out.println("Hejremove");
         if (livingEntity instanceof PlayerEntity) {
             PacketByteBuf passedData = new PacketByteBuf(Unpooled.buffer());
-            int shaderI = 0;
-            boolean shaderOn2 = false;
-            //passedData.writeBoolean(shaderOn2);
-            passedData.writeInt(shaderI);
-            ServerSidePacketRegistry.INSTANCE.sendToPlayer((PlayerEntity) livingEntity, GrandeCuisine.PLAY_PARTICLE_PACKET_ID,passedData);
+            //int shaderI = 0;
+            boolean shaderState = false;
+            passedData.writeBoolean(shaderState);
+            //passedData.writeInt(shaderI);
+            ServerSidePacketRegistry.INSTANCE.sendToPlayer((PlayerEntity) livingEntity, GrandeCuisine.SHADER_PACKET_ID,passedData);
             System.out.println("Hejremove_end");
         }
     }

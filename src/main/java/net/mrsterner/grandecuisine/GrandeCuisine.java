@@ -27,10 +27,7 @@ import net.mrsterner.grandecuisine.block.BarrelBlock;
 import net.mrsterner.grandecuisine.block.HibachiBlock;
 import net.mrsterner.grandecuisine.blockentity.BarrelBlockEntity;
 import net.mrsterner.grandecuisine.blockentity.HibachiEntity;
-import net.mrsterner.grandecuisine.effect.FuseStatusEffect;
-import net.mrsterner.grandecuisine.effect.ModEffectRegistry;
-import net.mrsterner.grandecuisine.effect.ModPotionRegistry;
-import net.mrsterner.grandecuisine.effect.ModStatusEffect;
+import net.mrsterner.grandecuisine.effect.*;
 import net.mrsterner.grandecuisine.entity.CrabEntity;
 import net.mrsterner.grandecuisine.items.*;
 
@@ -74,8 +71,10 @@ public class GrandeCuisine implements ModInitializer {
    //public static BlockEntityType<BarrelBlockEntity> BARREL_BLOCK_ENTITY;
     private static KeyBinding keyBinding;
 
+    public static ModStatusEffect crumbling = new CrumblingStatusEffect(StatusEffectType.NEUTRAL, 0x794044, false);
+    public static ModStatusEffect fuse = new FuseStatusEffect(StatusEffectType.HARMFUL, 0xcc3333, false);
 
-    public static final Identifier PLAY_PARTICLE_PACKET_ID = new Identifier("example", "particle");
+    public static final Identifier SHADER_PACKET_ID = new Identifier("example", "particle");
 
     public static final StatusEffect WILTING = new StatusEffect(StatusEffectType.NEUTRAL, 0x768238) {
         @Override
@@ -125,6 +124,25 @@ public class GrandeCuisine implements ModInitializer {
         BlockRenderLayerMap.INSTANCE.putBlock(GrandeCuisine.BARREL_BLOCK, RenderLayer.getCutout());
 
 
+
+    }
+    public static void registerAll() {
+
+        try {
+            int registered = 0;
+            for (Field field:ModEffectRegistry.class.getDeclaredFields()) {
+                if (ModStatusEffect.class.isAssignableFrom(field.getType())) {
+                    Identifier id = new Identifier(LibMod.MOD_ID, field.getName());
+                    Registry.register(Registry.STATUS_EFFECT, id, ((ModStatusEffect) field.get(null)).onRegister());
+                    Log.d("Registered potion "+id);
+                    registered++;
+                }
+            }
+            Log.i("Registered %d status effects", registered);
+
+        } catch (Exception e) {
+            Log.printAndPropagate(e);
+        }
 
     }
 
