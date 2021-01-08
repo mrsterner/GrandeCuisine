@@ -1,2 +1,2 @@
-# GrandeCuisine2
+# GrandeCuisine
 I try to learn Fabric
